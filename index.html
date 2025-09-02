@@ -3,132 +3,207 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>صفحة المنتج</title>
+  <title>الطلب الآن</title>
   <style>
     body {
-      font-family: Tahoma, sans-serif;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f4f4;
       margin: 0;
       padding: 0;
-      text-align: center;
-      background: #f9f9f9;
     }
     header {
-      background: #4CAF50;
-      color: #fff;
+      background: #333;
+      color: white;
       padding: 20px;
     }
-    h1 {
-      margin: 0;
+    .images {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 20px;
     }
-    .slideshow {
-      max-width: 400px;
-      margin: 20px auto;
-      position: relative;
-    }
-    .slideshow img {
-      width: 100%;
-      display: none;
+    .images img {
+      width: 250px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .slideshow img.active {
-      display: block;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
     }
     .btn {
-      background: #ff5722;
-      color: #fff;
-      padding: 15px 25px;
-      margin: 20px;
+      background: green;
+      color: white;
+      padding: 15px 30px;
       border: none;
       border-radius: 8px;
       font-size: 18px;
       cursor: pointer;
+      margin: 20px 0;
     }
-    form {
-      max-width: 400px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .btn:hover {
+      background: darkgreen;
+    }
+    /* Popup */
+    .modal {
       display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
     }
-    form input, form select {
+    .modal-content {
+      background: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: right;
+    }
+    .close {
+      float: left;
+      font-size: 22px;
+      cursor: pointer;
+      color: red;
+    }
+    input, select {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
-      border-radius: 6px;
+      margin: 8px 0;
       border: 1px solid #ccc;
+      border-radius: 5px;
     }
-    form label {
-      font-weight: bold;
+    .radio-group {
+      text-align: right;
+      margin: 10px 0;
+    }
+    .radio-group label {
       display: block;
-      margin-top: 10px;
-      text-align: right;
     }
-    .delivery-options {
-      text-align: right;
+    .submit-btn {
+      background: green;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .submit-btn:hover {
+      background: darkgreen;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>مرحبا بك في صفحة المنتج</h1>
+    <h1>مرحبا بك في صفحة الطلب</h1>
   </header>
 
-  <div class="slideshow">
-    <img src="https://i.ibb.co/7fH9ybh/1.jpg" class="active">
-    <img src="https://i.ibb.co/cKYc8Y7d/2.jpg">
-    <img src="https://i.ibb.co/C3B6W4j3/3.jpg">
+  <!-- الصور -->
+  <div class="images">
+    <img src="photo1.jpg" alt="صورة 1">
+    <img src="photo2.jpg" alt="صورة 2">
+    <img src="photo3.jpg" alt="صورة 3">
   </div>
 
-  <button class="btn" onclick="document.getElementById('orderForm').style.display='block'">أطلب الآن</button>
+  <!-- زر الطلب -->
+  <button class="btn" id="orderBtn">أطلب الآن</button>
 
-  <form id="orderForm">
-    <label>الإسم الكامل</label>
-    <input type="text" name="name" required>
+  <!-- الفورم popup -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeBtn">&times;</span>
+      <h2>معلومات الطلب</h2>
+      <form>
+        <label>الإسم:</label>
+        <input type="text" name="name" required>
 
-    <label>رقم الهاتف</label>
-    <input type="tel" name="phone" required>
+        <label>رقم الهاتف:</label>
+        <input type="tel" name="phone" required>
 
-    <label>الولاية</label>
-    <select name="wilaya" required>
-      <option value="">إختر ولايتك</option>
-      <option>الجزائر</option>
-      <option>وهران</option>
-      <option>سطيف</option>
-      <option>قسنطينة</option>
-      <option>عنابة</option>
-      <!-- تقدر تزيد باقي الولايات -->
-    </select>
+        <label>الولاية:</label>
+        <select name="wilaya" required>
+          <option value="">اختر ولايتك</option>
+          <option>أدرار</option>
+          <option>الشلف</option>
+          <option>الأغواط</option>
+          <option>أم البواقي</option>
+          <option>باتنة</option>
+          <option>بجاية</option>
+          <option>بسكرة</option>
+          <option>بشار</option>
+          <option>البليدة</option>
+          <option>البويرة</option>
+          <option>تمنراست</option>
+          <option>تبسة</option>
+          <option>تلمسان</option>
+          <option>تيارت</option>
+          <option>تيزي وزو</option>
+          <option>الجزائر</option>
+          <option>الجلفة</option>
+          <option>جيجل</option>
+          <option>سطيف</option>
+          <option>سعيدة</option>
+          <option>سكيكدة</option>
+          <option>سيدي بلعباس</option>
+          <option>عنابة</option>
+          <option>قالمة</option>
+          <option>قسنطينة</option>
+          <option>المدية</option>
+          <option>مستغانم</option>
+          <option>المسيلة</option>
+          <option>معسكر</option>
+          <option>ورقلة</option>
+          <option>وهران</option>
+          <option>البيض</option>
+          <option>إليزي</option>
+          <option>برج بوعريريج</option>
+          <option>بومرداس</option>
+          <option>الطارف</option>
+          <option>تندوف</option>
+          <option>تيسمسيلت</option>
+          <option>الوادي</option>
+          <option>خنشلة</option>
+          <option>سوق أهراس</option>
+          <option>تيبازة</option>
+          <option>ميلة</option>
+          <option>عين الدفلى</option>
+          <option>النعامة</option>
+          <option>عين تموشنت</option>
+          <option>غرداية</option>
+          <option>غليزان</option>
+          <option>تيميمون</option>
+          <option>برج باجي مختار</option>
+          <option>أولاد جلال</option>
+          <option>بني عباس</option>
+          <option>عين صالح</option>
+          <option>عين قزام</option>
+          <option>تقرت</option>
+          <option>جانت</option>
+          <option>المغير</option>
+          <option>المنيعة</option>
+        </select>
 
-    <label>طريقة التوصيل</label>
-    <div class="delivery-options">
-      <input type="radio" id="home" name="delivery" value="600دج - للباب" required>
-      <label for="home">إلى باب الدار (600 دج)</label><br>
-      <input type="radio" id="office" name="delivery" value="400دج - للمكتب">
-      <label for="office">إلى المكتب (400 دج)</label>
+        <div class="radio-group">
+          <label><input type="radio" name="delivery" value="600" required> لباب الدار - 600 دج</label>
+          <label><input type="radio" name="delivery" value="400"> للمكتب - 400 دج</label>
+        </div>
+
+        <button type="submit" class="submit-btn">تأكيد الطلب</button>
+      </form>
     </div>
-
-    <button class="btn" type="submit">تأكيد الطلب</button>
-  </form>
+  </div>
 
   <script>
-    // slideshow
-    let slides = document.querySelectorAll(".slideshow img");
-    let index = 0;
-    setInterval(() => {
-      slides[index].classList.remove("active");
-      index = (index + 1) % slides.length;
-      slides[index].classList.add("active");
-    }, 2000);
+    const orderBtn = document.getElementById('orderBtn');
+    const modal = document.getElementById('orderModal');
+    const closeBtn = document.getElementById('closeBtn');
 
-    // form submit
-    document.getElementById("orderForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      alert("تم إرسال طلبك بنجاح! سنتواصل معك قريبًا.");
-    });
+    orderBtn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
   </script>
 
 </body>
