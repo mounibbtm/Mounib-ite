@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مقبض كرسي السيارة - تخفيض خاص</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .slider {
+      position: relative;
+      max-width: 400px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .slides {
+      display: flex;
+      width: 300%;
+      animation: slide 6s infinite;
+    }
+    .slides img {
+      width: 100%;
+      flex-shrink: 0;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0%); }
+      33% { transform: translateX(-100%); }
+      66% { transform: translateX(-200%); }
+      100% { transform: translateX(0%); }
+    }
+    .price {
+      margin: 20px 0;
+      font-size: 20px;
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: #888;
+      margin-left: 10px;
+    }
+    .new-price {
+      color: #e63946;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    .discount {
+      background: #e63946;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    .info {
+      font-size: 18px;
+      margin: 15px 0;
+    }
+    .btn {
+      background: #28a745;
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #218838;
+    }
+    footer {
+      margin-top: 30px;
+      padding: 15px;
+      background: #222;
+      color: #fff;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>مقبض كرسي السيارة - VW / Seat / Skoda / Audi</header>
+
+  <div class="slider">
+    <div class="slides">
+      <img src="https://i.ibb.co/7fH9ybh/1.jpg" alt="مقبض كرسي 1">
+      <img src="https://i.ibb.co/cKYc8Y7d/2.jpg" alt="مقبض كرسي 2">
+      <img src="https://i.ibb.co/C3B6W4j3/3.jpg" alt="مقبض كرسي 3">
+    </div>
+  </div>
+
+  <div class="discount">🎉 تخفيض %37 🎉</div>
+
+  <div class="price">
+    <span class="old-price">1900 دج</span>
+    <span class="new-price">1200 دج</span>
+  </div>
+
+  <div class="info">✅ الدفع عند الإستلام</div>
+  <div class="info">✅ يمكنك فتح الطرد و معاينة السلعة قبل الدفع</div>
+  <div class="info">✅ التوصيل متوفر 58 ولاية</div>
+
+  <button class="btn">اطلب الآن</button>
+
+  <footer>© 2025 - عرض خاص محدود</footer>
+
+</body>
+  </html>
