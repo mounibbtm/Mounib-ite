@@ -3,121 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مقبض كرسي السيارة - تخفيض خاص</title>
+  <title>صفحة المنتج</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Tahoma, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8f8f8;
-      color: #333;
       text-align: center;
+      background: #f9f9f9;
     }
     header {
-      background: #222;
+      background: #4CAF50;
       color: #fff;
       padding: 20px;
-      font-size: 22px;
-      font-weight: bold;
     }
-    .slider {
-      position: relative;
+    h1 {
+      margin: 0;
+    }
+    .slideshow {
       max-width: 400px;
       margin: 20px auto;
-      overflow: hidden;
-      border-radius: 12px;
+      position: relative;
+    }
+    .slideshow img {
+      width: 100%;
+      display: none;
+      border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-    .slides {
-      display: flex;
-      width: 300%;
-      animation: slide 6s infinite;
-    }
-    .slides img {
-      width: 100%;
-      flex-shrink: 0;
-    }
-    @keyframes slide {
-      0% { transform: translateX(0%); }
-      33% { transform: translateX(-100%); }
-      66% { transform: translateX(-200%); }
-      100% { transform: translateX(0%); }
-    }
-    .price {
-      margin: 20px 0;
-      font-size: 20px;
-    }
-    .old-price {
-      text-decoration: line-through;
-      color: #888;
-      margin-left: 10px;
-    }
-    .new-price {
-      color: #e63946;
-      font-weight: bold;
-      font-size: 24px;
-    }
-    .discount {
-      background: #e63946;
-      color: #fff;
-      padding: 8px 15px;
-      border-radius: 8px;
-      display: inline-block;
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
-    .info {
-      font-size: 18px;
-      margin: 15px 0;
+    .slideshow img.active {
+      display: block;
     }
     .btn {
-      background: #28a745;
+      background: #ff5722;
       color: #fff;
-      padding: 12px 25px;
+      padding: 15px 25px;
+      margin: 20px;
       border: none;
       border-radius: 8px;
-      font-size: 20px;
+      font-size: 18px;
       cursor: pointer;
-      transition: 0.3s;
     }
-    .btn:hover {
-      background: #218838;
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: none;
     }
-    footer {
-      margin-top: 30px;
-      padding: 15px;
-      background: #222;
-      color: #fff;
-      font-size: 14px;
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    form label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      text-align: right;
+    }
+    .delivery-options {
+      text-align: right;
     }
   </style>
 </head>
 <body>
 
-  <header>مقبض كرسي السيارة - VW / Seat / Skoda / Audi</header>
+  <header>
+    <h1>مرحبا بك في صفحة المنتج</h1>
+  </header>
 
-  <div class="slider">
-    <div class="slides">
-      <img src="https://i.ibb.co/7fH9ybh/1.jpg" alt="مقبض كرسي 1">
-      <img src="https://i.ibb.co/cKYc8Y7d/2.jpg" alt="مقبض كرسي 2">
-      <img src="https://i.ibb.co/C3B6W4j3/3.jpg" alt="مقبض كرسي 3">
+  <div class="slideshow">
+    <img src="https://i.ibb.co/7fH9ybh/1.jpg" class="active">
+    <img src="https://i.ibb.co/cKYc8Y7d/2.jpg">
+    <img src="https://i.ibb.co/C3B6W4j3/3.jpg">
+  </div>
+
+  <button class="btn" onclick="document.getElementById('orderForm').style.display='block'">أطلب الآن</button>
+
+  <form id="orderForm">
+    <label>الإسم الكامل</label>
+    <input type="text" name="name" required>
+
+    <label>رقم الهاتف</label>
+    <input type="tel" name="phone" required>
+
+    <label>الولاية</label>
+    <select name="wilaya" required>
+      <option value="">إختر ولايتك</option>
+      <option>الجزائر</option>
+      <option>وهران</option>
+      <option>سطيف</option>
+      <option>قسنطينة</option>
+      <option>عنابة</option>
+      <!-- تقدر تزيد باقي الولايات -->
+    </select>
+
+    <label>طريقة التوصيل</label>
+    <div class="delivery-options">
+      <input type="radio" id="home" name="delivery" value="600دج - للباب" required>
+      <label for="home">إلى باب الدار (600 دج)</label><br>
+      <input type="radio" id="office" name="delivery" value="400دج - للمكتب">
+      <label for="office">إلى المكتب (400 دج)</label>
     </div>
-  </div>
 
-  <div class="discount">🎉 تخفيض %37 🎉</div>
+    <button class="btn" type="submit">تأكيد الطلب</button>
+  </form>
 
-  <div class="price">
-    <span class="old-price">1900 دج</span>
-    <span class="new-price">1200 دج</span>
-  </div>
+  <script>
+    // slideshow
+    let slides = document.querySelectorAll(".slideshow img");
+    let index = 0;
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 2000);
 
-  <div class="info">✅ الدفع عند الإستلام</div>
-  <div class="info">✅ يمكنك فتح الطرد و معاينة السلعة قبل الدفع</div>
-  <div class="info">✅ التوصيل متوفر 58 ولاية</div>
-
-  <button class="btn">اطلب الآن</button>
-
-  <footer>© 2025 - عرض خاص محدود</footer>
+    // form submit
+    document.getElementById("orderForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      alert("تم إرسال طلبك بنجاح! سنتواصل معك قريبًا.");
+    });
+  </script>
 
 </body>
-  </html>
+</html>
