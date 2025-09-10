@@ -1,224 +1,204 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Product — Landing (eBay-like)</title>
-  <style>
-    :root{
-      --blue:#0064d2; --red:#ff4500; --yellow:#ffd100;
-      --muted:#6b7280; --card:#ffffff; --bg:#f4f6f8;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#111}
-    /* header */
-    .topbar{background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;gap:16px}
-    .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px;color:var(--blue)}
-    .search{flex:1;display:flex;gap:8px}
-    .search input{flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:6px}
-    .search button{padding:10px 14px;border-radius:6px;border:0;background:var(--blue);color:#fff;font-weight:600}
-    .account{font-size:14px;color:var(--muted)}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>منتج — صفحة الطلب</title>
+<style>
+body {font-family: Arial, sans-serif; margin:0; background:#f4f6f8; color:#111; direction:rtl; text-align:right;}
+.container {max-width:1100px; margin:20px auto; display:grid; grid-template-columns:1fr 360px; gap:20px;}
+.card {background:#fff; border-radius:10px; padding:18px; box-shadow:0 6px 20px rgba(2,6,23,.06);}
+.breadcrumbs {font-size:13px; color:#6b7280; margin-bottom:8px;}
+.product-grid {display:grid; grid-template-columns:420px 1fr; gap:18px;}
+.gallery {display:flex; flex-direction:column; gap:10px;}
+.main-img {width:100%; height:360px; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#f0f2f5;}
+.main-img img {max-width:100%; max-height:100%; object-fit:contain;}
+.thumbs {display:flex; gap:8px; margin-top:6px;}
+.thumbs img {width:64px; height:64px; object-fit:cover; border-radius:6px; border:1px solid #e6e9ee; cursor:pointer;}
+.details h1 {font-size:20px; margin:0 0 8px;}
+.details h2 {font-size:16px; margin:0 0 12px;}
+.price-row {display:flex; gap:12px; align-items:center; margin-bottom:12px;}
+.price {font-size:26px; font-weight:700; color:#111;}
+.buy-actions {display:flex; gap:10px; margin-bottom:12px;}
+.btn {padding:12px 14px; border-radius:8px; border:0; font-weight:700; cursor:pointer;}
+.btn-primary {background:#ff4500; color:#fff;}
 
-    /* container */
-    .container{max-width:1100px;margin:22px auto;padding:0 16px;display:grid;grid-template-columns: 1fr 360px;gap:20px;align-items:start}
-
-    /* left card (gallery + details) */
-    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 20px rgba(2,6,23,.06)}
-    .breadcrumbs{font-size:13px;color:var(--muted);margin-bottom:8px}
-    .product-grid{display:grid;grid-template-columns:420px 1fr;gap:18px}
-    .gallery{display:flex;flex-direction:column;gap:10px}
-    .main-img{width:100%;height:360px;border-radius:8px;overflow:hidden;background:#f0f2f5;display:flex;align-items:center;justify-content:center}
-    .main-img img{max-width:100%;max-height:100%;object-fit:contain}
-    .thumbs{display:flex;gap:8px;margin-top:6px}
-    .thumbs img{width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #e6e9ee;cursor:pointer}
-
-    .details h1{font-size:20px;margin:0 0 8px}
-    .meta{color:var(--muted);font-size:13px;margin-bottom:12px}
-    .price-row{display:flex;gap:12px;align-items:center;margin-bottom:12px}
-    .price{font-size:26px;font-weight:700;color:#111}
-    .bulk{font-size:13px;color:var(--muted)}
-    .buy-actions{display:flex;gap:10px;margin-bottom:12px}
-    .btn{padding:12px 14px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
-    .btn-primary{background:var(--red);color:#fff}
-    .btn-ghost{background:#fff;border:1px solid #e6e9ee}
-    .small{font-size:13px}
-
-    .info-list{display:flex;gap:12px;color:var(--muted);font-size:13px;margin-top:6px}
-
-    /* right card (buy box & seller) */
-    .buy-box{position:sticky;top:18px}
-    .box{background:var(--card);border-radius:10px;padding:14px;box-shadow:0 6px 18px rgba(2,6,23,.04);margin-bottom:12px}
-    .seller{display:flex;gap:12px;align-items:center}
-    .seller img{width:56px;height:56px;border-radius:8px;object-fit:cover}
-    .seller .smeta{font-size:13px;color:var(--muted)}
-    .badge{display:inline-block;padding:6px 8px;border-radius:6px;background:#f1f9ff;color:var(--blue);font-weight:700;font-size:12px}
-
-    /* compatibility table */
-    .compat{margin-top:12px}
-    table{width:100%;border-collapse:collapse;font-size:13px}
-    th,td{padding:8px;border-bottom:1px solid #f3f4f6;text-align:left}
-    th{color:var(--muted);font-weight:600;font-size:12px}
-
-    /* description */
-    .desc{margin-top:16px;font-size:14px;line-height:1.5;color:#222}
-    .accordion{margin-top:12px}
-    .acc-head{cursor:pointer;padding:10px;border-radius:8px;background:#fbfbfb;border:1px solid #f0f1f3}
-
-    /* responsive */
-    @media (max-width:980px){
-      .container{grid-template-columns:1fr; padding-bottom:40px}
-      .product-grid{grid-template-columns:1fr}
-      .main-img{height:300px}
-      .buy-box{position:static}
-    }
-  </style>
+/* Modal */
+.modal {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.5); justify-content:center; align-items:center; z-index:1000;}
+.modal-content {background:#fff; padding:20px; border-radius:10px; width:90%; max-width:500px; position:relative;}
+.close {position:absolute; top:10px; left:10px; font-size:20px; cursor:pointer;}
+label {display:block; margin-top:10px; font-weight:600;}
+input, select {width:100%; padding:8px; margin-top:4px; border:1px solid #ccc; border-radius:6px;}
+.confirm-btn {background:#ff4500; color:#fff; width:100%; margin-top:12px; padding:12px; border-radius:6px; border:none; font-weight:700; cursor:pointer;}
+.thank {display:none; margin-top:20px; font-size:18px; font-weight:700; color:green;}
+@media(max-width:980px){.container{grid-template-columns:1fr;} .main-img{height:300px;}}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="logo">CARSTYLE DZ<span class="small" style="color:var(--muted);font-weight:600">-shop</span></div>
-  </header>
 
-  <main class="container">
-    <section>
-      <div class="card">
-        <div class="breadcrumbs"> Car Parts & Accessories > Interior Parts</div>
-
-        <div class="product-grid">
-          <div class="gallery">
-            <div class="main-img" id="mainImg">
-              <img id="currentImage" src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/2d08768b2f8850291703bf6c1fa7637a31eca736/pppppppppppppppppppp.png" alt="Product Image">
-            </div>
-
-            <div class="thumbs" id="thumbs">
-              <img src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/2d08768b2f8850291703bf6c1fa7637a31eca736/pppppppppppppppppppp.png" data-src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/2d08768b2f8850291703bf6c1fa7637a31eca736/pppppppppppppppppppp.png" alt="Main">
-              <img src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/7f147342-51b2-42a2-b54f-07912fe9c537.jpeg" data-src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/7f147342-51b2-42a2-b54f-07912fe9c537.jpeg" alt="Thumb 2">
-              <img src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/7fb07d8e-8990-424d-86b1-1b8e2b7dbcdd.png" data-src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/7fb07d8e-8990-424d-86b1-1b8e2b7dbcdd.png" alt="Thumb 3">
-              <img src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/s-l1600%20(1).webp" data-src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/s-l1600%20(1).webp" alt="Thumb 4">
-            </div>
+<div class="container">
+  <section>
+    <div class="card">
+      <div class="breadcrumbs">قطع غيار السيارة > أجزاء داخلية</div>
+      <div class="product-grid">
+        <div class="gallery">
+          <div class="main-img" id="mainImg">
+            <img id="currentImage" src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/2d08768b2f8850291703bf6c1fa7637a31eca736/pppppppppppppppppppp.png" alt="صورة المنتج">
           </div>
-
-          <div class="details">
-            <h1>مقبض تعديل مقعد السيارة</h1>
-            <h2>VW SEAT AUDI SKODA خاص بالسيارات الالمانية</h2>
-            <div class="meta">Sold by <strong>autoyouth</strong> • Business seller • 99.5% positive</div>
-
-            <div class="price-row">
-              <div>
-                <div class="price">DZ1500</div>
-              </div>
-            </div>
-
-            <div class="buy-actions">
-              <button class="btn btn-primary">Buy it now</button>
-            </div>
-
-            <div class="info-list">
-              <div>Condition: <strong>New</strong></div>
-              <div>Returns: <strong>30 days</strong></div>
-              <div>Located: <strong>Bardon, UK</strong></div>
-            </div>
-
-            <div class="desc">
-              <p><strong>About this item</strong></p>
-              <p>High-quality replacement length adjustment handle for various VW/Audi models. Durable plastic, OEM style fitment. Check compatibility list below.</p>
-              <div class="accordion">
-                <div class="acc-head" onclick="toggleAcc(this)">Compatibility (click to expand)</div>
-                <div class="acc-body" style="display:none;margin-top:10px">
-                  <table>
-                    <thead><tr><th>Make</th><th>Model</th><th>Year/Engine</th></tr></thead>
-                    <tbody>
-                      <tr><td>Audi</td><td>A1</td><td>2015-2016 (many variants)</td></tr>
-                      <tr><td>VW</td><td>Golf / Polo</td><td>2008-2016</td></tr>
-                      <tr><td>Seat</td><td>Ibiza</td><td>2009-2018</td></tr>
-                      <tr><td>SKODA</td><td>OCTAVIA</td><td>2009-2019</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+          <div class="thumbs" id="thumbs">
+            <img src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/2d08768b2f8850291703bf6c1fa7637a31eca736/pppppppppppppppppppp.png" data-src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/2d08768b2f8850291703bf6c1fa7637a31eca736/pppppppppppppppppppp.png" alt="رئيسية">
+            <img src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/7f147342-51b2-42a2-b54f-07912fe9c537.jpeg" data-src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/7f147342-51b2-42a2-b54f-07912fe9c537.jpeg" alt="صغير 1">
+            <img src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/7fb07d8e-8990-424d-86b1-1b8e2b7dbcdd.png" data-src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/7fb07d8e-8990-424d-86b1-1b8e2b7dbcdd.png" alt="صغير 2">
+            <img src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/s-l1600%20(1).webp" data-src="https://raw.githubusercontent.com/mounibbtm/Mounib-ite/7e9bd891714660094d357a4d32faa67f07869540/s-l1600%20(1).webp" alt="صغير 3">
           </div>
         </div>
 
-        <div style="margin-top:18px" class="card">
-          <strong>Item specifics</strong>
-          <table style="margin-top:8px">
-            <tbody>
-              <tr><th>Condition</th><td>New</td></tr>
-              <tr><th>Material</th><td>Plastic</td></tr>
-              <tr><th>Weight</th><td>80g</td></tr>
-            </tbody>
-          </table>
+        <div class="details">
+          <h1>مقبض تعديل مقعد السيارة</h1>
+          <h2>خاص بسيارات VW / SEAT / AUDI / SKODA</h2>
+          <div class="price-row">
+            <div class="price">DZ1500</div>
+          </div>
+          <div class="buy-actions">
+            <button class="btn btn-primary" id="orderBtn">أطلب الآن</button>
+          </div>
         </div>
 
       </div>
+    </div>
+  </section>
+</div>
 
-      <!-- long description -->
-      <div class="card" style="margin-top:14px">
-        <h3 style="margin:0 0 10px">Description</h3>
-        <p class="desc">Seller-provided description goes here. Include measurements, compatibility notes, what's included in the kit, shipping & returns policy, and any warranty information.</p>
-      </div>
+<!-- Modal Form -->
+<div class="modal" id="orderModal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>بيانات الطلب</h2>
+    <label>الإسم الكامل</label>
+    <input type="text" id="fullName" placeholder="أدخل إسمك الكامل">
+    <label>الولاية</label>
+    <select id="wilaya"><option value="">اختر الولاية</option></select>
+    <label>البلدية</label>
+    <select id="commune"><option value="">اختر البلدية</option></select>
+    <label>رقم الهاتف</label>
+    <input type="text" id="phone" placeholder="أدخل رقم الهاتف">
+    <label>التوصيل إختياري</label>
+    <select id="delivery">
+      <option value="600">لباب الدار - 600دج</option>
+      <option value="400">للمكتب - 400دج</option>
+    </select>
+    <button class="confirm-btn" id="confirmOrder">تأكيد الطلبية</button>
+    <div class="thank" id="thankMsg">شكراً على ثقتك!</div>
+  </div>
+</div>
 
-    </section>
+<script>
+// Gallery
+document.querySelectorAll('#thumbs img').forEach(img=>{
+  img.addEventListener('click',()=>{ document.getElementById('currentImage').src = img.dataset.src; });
+});
 
-    <aside class="buy-box">
-      <div class="box">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <div style="font-size:14px;color:var(--muted)">Price</div>
-            <div style="font-size:24px;font-weight:800">DZ1500</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:13px;color:var(--muted)">Quantity</div>
-            <select style="padding:8px;border-radius:6px;border:1px solid #e6e9ee">
-              <option>1</option><option>2</option><option>6</option>
-            </select>
-          </div>
-        </div>
+// Modal
+const orderBtn = document.getElementById('orderBtn');
+const modal = document.getElementById('orderModal');
+const closeModal = document.getElementById('closeModal');
+const confirmOrder = document.getElementById('confirmOrder');
+const thankMsg = document.getElementById('thankMsg');
 
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button class="btn btn-primary" style="flex:1">Buy it now</button>
-          <button class="btn btn-ghost" style="flex:1">Add to basket</button>
-        </div>
+orderBtn.onclick = ()=> modal.style.display='flex';
+closeModal.onclick = ()=> modal.style.display='none';
+window.onclick = (e)=> { if(e.target==modal) modal.style.display='none'; }
 
-        <div style="margin-top:12px;font-size:13px;color:var(--muted)">
-          <div>Shipping: varies • Returns accepted (buyer pays return postage)</div>
-          <div style="margin-top:6px"><span class="badge">Top rated</span> Usually responds within 24 hours</div>
-        </div>
-      </div>
+// Wilayas et communes
+const wilayas = {
+<select id="wilaya" onchange="loadCommunes()">
+  <option value="">اختر الولاية</option>
+</select>
 
-      <div class="box">
-        <div class="seller">
-          <img src="https://via.placeholder.com/56" alt="seller">
-          <div>
-            <div style="font-weight:700">autoyouth</div>
-            <div class="smeta">Business seller • 95% positive •</div>
-          </div>
-        </div>
+<select id="commune">
+  <option value="">اختر البلدية</option>
+</select>
 
-        <div style="margin-top:12px">
-          <button class="btn btn-ghost" style="width:100%">Contact seller</button>
-          <button class="btn btn-ghost" style="width:100%;margin-top:8px">Visit shop</button>
-        </div>
-      </div>
-
-    </aside>
-  </main>
-
-  <script>
-    // thumbnail switching
-    document.querySelectorAll('#thumbs img').forEach(img => {
-      img.addEventListener('click', () => {
-        const src = img.getAttribute('data-src');
-        document.getElementById('currentImage').src = src;
+<script>
+  // تحميل بيانات الولايات
+  fetch('data/wilayas.json')
+    .then(response => response.json())
+    .then(data => {
+      const wilayaSelect = document.getElementById('wilaya');
+      data.forEach(wilaya => {
+        const option = document.createElement('option');
+        option.value = wilaya.code;  // الكود تاع الولاية
+        option.textContent = wilaya.name_ar;  // الاسم بالعربية
+        wilayaSelect.appendChild(option);
       });
     });
 
-    function toggleAcc(el){
-      const body = el.nextElementSibling;
-      body.style.display = body.style.display === 'none' ? 'block' : 'none';
-      el.scrollIntoView({behavior:'smooth',block:'nearest'});
-    }
-  </script>
+  // تحميل البلديات حسب الولاية المختارة
+  function loadCommunes() {
+    const wilayaCode = document.getElementById('wilaya').value;
+    fetch('data/communes.json')
+      .then(response => response.json())
+      .then(data => {
+        const communeSelect = document.getElementById('commune');
+        communeSelect.innerHTML = '<option value="">اختر البلدية</option>';
+        data
+          .filter(commune => commune.wilaya_code === wilayaCode)
+          .forEach(commune => {
+            const option = document.createElement('option');
+            option.value = commune.code;
+            option.textContent = commune.name_ar;
+            communeSelect.appendChild(option);
+          });
+      });
+  }
+</script>
+
+const wilayaSelect = document.getElementById('wilaya');
+const communeSelect = document.getElementById('commune');
+
+// remplir wilayas
+for(let w in wilayas){
+  let option = document.createElement('option');
+  option.value=w; option.textContent=w;
+  wilayaSelect.appendChild(option);
+}
+
+// changer communes
+wilayaSelect.onchange = ()=>{
+  communeSelect.innerHTML = '<option value="">اختر البلدية</option>';
+  const communes = wilayas[wilayaSelect.value] || [];
+  communes.forEach(c=>{
+    let opt = document.createElement('option');
+    opt.value=c; opt.textContent=c;
+    communeSelect.appendChild(opt);
+  });
+}
+
+// Confirmation
+confirmOrder.onclick = ()=>{
+  const name = document.getElementById('fullName').value.trim();
+  const wil = wilayaSelect.value;
+  const com = communeSelect.value;
+  const phone = document.getElementById('phone').value.trim();
+  const delivery = document.getElementById('delivery').value;
+
+  if(!name || !wil || !com || !phone){
+    alert('يرجى ملء جميع الحقول!');
+    return;
+  }
+
+  thankMsg.style.display='block';
+  setTimeout(()=>{
+    modal.style.display='none';
+    thankMsg.style.display='none';
+    document.getElementById('fullName').value='';
+    wilayaSelect.value=''; 
+    communeSelect.innerHTML='<option value="">اختر البلدية</option>';
+    document.getElementById('phone').value='';
+    document.getElementById('delivery').value='600';
+  },2000);
+}
+</script>
+
 </body>
 </html>
